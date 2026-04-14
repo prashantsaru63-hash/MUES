@@ -9,6 +9,11 @@
             "password": "chawan123",
             "role": "customer",
             "cart": []
+        },
+        "hari": {
+            "password": "hari",
+            "role": "customer",
+            "cart": []
         }
     },
     "products": {},

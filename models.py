@@ -13,3 +13,10 @@ class Product :
         self.price = price
         self.stock = stock        
          
+
+class Order :
+
+    def __init__(self,username,items,total):
+        self.username = username
+        self.items = items
+        self.total = total         

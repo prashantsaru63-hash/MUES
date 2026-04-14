@@ -72,28 +72,106 @@ def main() :
 
         # Customer Panel 
 
-        if role == "customer" :
-            while True :
+            if role == "customer" :
 
-                user_menu()
+                while True :
 
-                c = input("Enter choices : ")
+                    user_menu()
+
+                    c = input("Enter choices : ")
 
                 # view products 
 
-                if c == "1" :
-                    for pid , prod in data["products"].items():
-                        print(pid,prod)
+                    if c == "1" :
+                        for pid , prod in data["products"].items():
+                            print(pid,prod)
 
 
                 # Add to cart             
 
-                elif c == "2":
-                    pid = int(input("Enter the product ID : "))
+                    elif c == "2":
+                        pid = int(input("Enter the product ID : "))
 
-                    if pid in data["products"] :
-                        data["users"][u]["cart"].append(pid)
+                        if pid in data["products"] :
+                            data["users"][u]["cart"].append(pid)
+                            save_data(data)
+
+
+                # View Cart 
+
+                    elif c == "3" :
+                     
+                        for pid in data["users"][u]["cart"] :
+                            print(pid,data["products"][pid])
+
+
+                # Place order 
+
+                    elif c == "4" :
+
+                        total = 0
+                        items = []
+
+                        for pid in data["users"][u]["cart"] :
+                            prod = data["products"][pid]
+                            total += prod["price"]
+                            items.append(prod["name"])
+
+                            prod["stock"] -= 1
+
+                        order = {
+                            "user" : u,
+                            "items" : items,
+                            "total" : total
+                        }    
+
+                        data["orders"].append(order) 
+                        data["users"][u]["cart"] = []
+
                         save_data(data)
+                        print("Order Placed")
+
+                    elif c == "5" :
+                        break    
+
+            if role == "admin" :
+
+                while True :
+                    admin_menu()
+
+                    c = input("Enter the choice : ")      
+
+                    # ADD Product 
+
+                    if c == "1" :
+                        pid = input("ID : ")
+                        name = input("Name : ")
+                        price = float(input("Price : ")) 
+                        stock = int(input("Stock : "))
+
+                        data["products"][pid] = {
+                            "name" : name,
+                            "price" : price,
+                            "stock" : stock
+                        }
+
+                        save_data(data)
+
+
+                        # view Products
+
+                    elif c == "2" :
+                        print(data["products"])   
+
+                        # view 
+
+                    elif c == "3" :
+
+                        for o in data["orders"] :
+                            print(o)
+
+                    elif c == "4" :
+                        break            
 
 
 
