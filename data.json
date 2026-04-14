@@ -1,0 +1,16 @@
+{
+    "users": {
+        "evenjal": {
+            "password": "aliza",
+            "role": "customer",
+            "cart": []
+        },
+        "chawan": {
+            "password": "chawan123",
+            "role": "customer",
+            "cart": []
+        }
+    },
+    "products": {},
+    "orders": []
+}
