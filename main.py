@@ -1,4 +1,4 @@
-from models import User
+from models import User , Product 
 from database import load_data , save_data
 
 def menu() :
@@ -68,6 +68,33 @@ def main() :
 
             role = data["users"][u]["role"]
             print(f"Welcome {u} {role}")
+
+
+        # Customer Panel 
+
+        if role == "customer" :
+            while True :
+
+                user_menu()
+
+                c = input("Enter choices : ")
+
+                # view products 
+
+                if c == "1" :
+                    for pid , prod in data["products"].items():
+                        print(pid,prod)
+
+
+                # Add to cart             
+
+                elif c == "2":
+                    pid = int(input("Enter the product ID : "))
+
+                    if pid in data["products"] :
+                        data["users"][u]["cart"].append(pid)
+                        save_data(data)
+
 
 
         elif choice == "3" :
